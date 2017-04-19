@@ -80,6 +80,29 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </script>
   </dom-module>
 
-  <iron-ajax-demo></iron-ajax-demo>
+  <!-- <iron-ajax-demo></iron-ajax-demo> -->
+
+  <dom-module id="test-ie">
+    <template>
+      <span>testing IE</span>
+      <iron-ajax
+        id="ajax"
+        url="https://d-citrix-api.salesnext.com/api/rest/user/forgot-username"
+        method="POST"
+        content-type="application/json"
+      ></iron-ajax>
+    </template>
+    <script>
+      Polymer({
+        is: 'test-ie',
+        ready: function () {
+          this.$.ajax.generateRequest().completes.catch(() => {
+            console.log('error response', this.$.ajax.lastRequest.response);
+          });
+        }
+      });
+    </script>
+  </dom-module>
+  <test-ie></test-ie>
 </body>
 </html>
